@@ -6,7 +6,7 @@ var port = 3000;
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
-var exphbs = require("express.handlebars");
+var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({defaultLayout:"main"}));
 
 app.set("view engine", "handlebars");
@@ -28,6 +28,10 @@ connection.connect(function(err){
 });
 
 //--> here we will call the routes
+
+app.get('/', function (req, res) {
+    res.render("index");
+});
 
 app.listen(port, function(){
 	console.log("SERVER STARTED");
