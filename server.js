@@ -31,10 +31,19 @@ connection.connect(function(err){
 
 app.get('/', function(req, res){
 	connection.query("SELECT * FROM wishes", function(err, results){
-		console.log(results);
+		// console.log(results);
 		res.render("index", {
 			wishes:results
 		});
+	});
+});
+
+app.post('/', function(req, res){
+	connection.query("INSERT INTO Wishes(wish)VALUES(?)",[req.body.wish], function(err, results){
+		if(err){
+			throw err;
+		}
+		res.redirect('/');
 	});
 });
 //
