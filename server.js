@@ -8,9 +8,9 @@ app.use(bodyParser.json());
 
 var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({defaultLayout:"main"}));
-
 app.set("view engine", "handlebars");
 
+//--- Connect to the DB 
 var mysql = require("mysql");
 var connection = mysql.createConnection({
 	host:"localhost",
@@ -29,9 +29,27 @@ connection.connect(function(err){
 
 //--> here we will call the routes
 
-app.get('/', function (req, res) {
-    res.render("index");
+app.get('/', function(req, res){
+	connection.query("SELECT * FROM wishes", function(err, results){
+		console.log(results);
+		res.render("index", {
+			wishes:results
+		});
+	});
 });
+//
+//----------> the code below is to test even without connecting to the DB 
+//----------> that it can render an object 
+// app.get('/', function (req, res) {
+//     res.render("index",
+//     {
+//     	id: 1,
+//     	wish:"to fly"
+//     }
+
+//     );
+// });
+//-----------------------------------------------------------
 
 app.listen(port, function(){
 	console.log("SERVER STARTED");

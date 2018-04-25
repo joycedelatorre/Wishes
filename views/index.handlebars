@@ -1,1 +1,17 @@
-{{<h1> hello</h1>}}
+{{!-- <h1> hell</h1>
+<p>id: {{id}} </p>
+<p>wish: {{wish}} </p>
+ --}}
+
+<ul>
+	{{!-- MYSQL wishes:  --}}
+	{{#each wishes}} 
+		<li>
+			<p> Id: {{id}}</p>
+			<p> Wish: {{wish}}</p>
+		</li>
+	{{/each}}
+
+
+
+</ul>
